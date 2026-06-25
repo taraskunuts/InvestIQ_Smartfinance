@@ -1,0 +1,63 @@
+/* Фоновое затемнение для модалки (Бекдроп) */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Темный полупрозрачный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Чтобы модалка была поверх хедера */
+}
+
+/* Белое окошко по центру */
+.modal-content {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  min-width: 300px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: #333333; /* Явно задаем цвет текста, чтобы он не был белым */
+}
+
+/* Кнопка-крестик для закрытия */
+.modal-close-x {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+}
+
+/* Кнопки действий внутри модалки */
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #e0e0e0;
+  color: #333;
+}
