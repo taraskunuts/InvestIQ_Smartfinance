@@ -20,9 +20,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           
-           {/* КОЛИ БУДЕШ ПИСАТИ РЕЄСТРАЦІЮ ЗМІНИ ПОЧАТКОВУ СТОРІНКУ НА РЕЄСТРАЦІЙНУ ЩОБ ЇЇ ПРЕКИДУВАЛО ПОДІМ НА ДАШБОРД  */}
+   
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+           <Route path="/dashboard/*" element={<DashboardPage />} />
           <Route path="/login" element={<LoginPage />} />
           
         </Routes>

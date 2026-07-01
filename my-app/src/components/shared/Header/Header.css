@@ -1,0 +1,87 @@
+.component-header {
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e0e5eb;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.header-logo img {
+width:  39px;
+height: 31;
+}
+
+
+.header-logo {
+  gap: 10px;
+  align-items: center;
+    position: relative;
+    display: block;
+}
+
+.header-logo p {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  font-family: sans-serif;
+  position: absolute;
+
+  left: 25px;
+  top: 6px;
+}
+
+.header-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #f0f3f7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #555555;
+  font-size: 14px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #52555F;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #e0e5eb;
+  margin: 0 5px;
+}
+
+.header-logout-btn {
+  font-size: 14px;
+  color: #52555F;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.header-logout-btn:hover {
+  color: #FF751D;
+}

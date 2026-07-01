@@ -1,0 +1,97 @@
+.balance_rap-component.flex {
+  display: flex;
+  align-items: center;
+
+  background-color: #F2F5FC;
+  padding-top: 40px;
+  justify-content: center;
+}
+
+.balance-label {
+
+  color: #52555FB2;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.balance_rap-component input {
+  background: #ffffff;
+  border: 2px solid #eef2f7;
+  border-radius: 16px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  outline: none;
+  width: 140px;
+  margin-left: 21px ;
+}
+
+.confirm-btn {
+  background: #ffffff;
+  border: 2px solid #eef2f7;
+  border-radius: 16px;
+  width: 125px;
+  height: 44px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #a0aec0;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  margin-left: 15px;
+}
+
+.confirm-btn:hover {
+  border-color: #cbd5e1;
+  color: #718096;
+}
+
+.tooltip-box {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 100%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: linear-gradient(135deg, #0d2342 0%, #061124 100%);
+  color: #ffffff;
+  padding: 30px 41px;
+  border-radius: 24px;
+  width: 294px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-title {
+
+  font-size: 14px;
+  width: 400;
+  font-weight: normal;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+}
+
+.tooltip-text {
+
+  font-size: 12px;
+  color: #a0aec0;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-450%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #0d2342;
+}
