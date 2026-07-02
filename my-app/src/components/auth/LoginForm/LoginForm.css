@@ -1,0 +1,113 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-title {
+
+    text-align: center;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+
+    line-height: 1.6;
+}
+
+.google-btn {
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    margin-bottom: 25px;
+}
+
+.login-divider {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 13px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.form-group input {
+
+    height: 46px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    outline: none;
+
+    padding: 0 18px;
+
+    background: #f4f4f4;
+}
+
+.error {
+
+    margin-top: 6px;
+
+    color: red;
+
+    font-size: 12px;
+}
+
+.buttons {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.login-btn,
+.register-btn {
+
+    width: 140px;
+
+    height: 46px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.login-btn {
+    background: orange;
+    color: white;
+}
+
+.register-btn {
+    background: #f1f1f1;
+}
