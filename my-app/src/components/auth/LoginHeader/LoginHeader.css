@@ -1,0 +1,20 @@
+.login-header {
+  width: 100%;
+  padding: 20px 32px;
+  background: var(--color-surface);
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-logo img {
+  width: 42px;
+}
+
+.login-logo span {
+  font-size: 20px;
+  font-weight: 700;
+}

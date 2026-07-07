@@ -1,9 +1,18 @@
 import "./LoginForm.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  return (
-    <form className="login-form">
+  const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Тимчасово просто відкриваємо Dashboard
+    navigate("/dashboard");
+  };
+
+  return (
+    <form className="login-form" onSubmit={handleSubmit}>
       <p className="login-title">
         Ви можете авторизуватися за допомогою акаунта Google
       </p>
@@ -24,8 +33,6 @@ function LoginForm() {
           type="email"
           placeholder="your@email.com"
         />
-
-        <span className="error"></span>
       </div>
 
       <div className="form-group">
@@ -36,12 +43,9 @@ function LoginForm() {
           type="password"
           placeholder="********"
         />
-
-        <span className="error"></span>
       </div>
 
       <div className="buttons">
-
         <button
           type="submit"
           className="login-btn"
@@ -55,9 +59,7 @@ function LoginForm() {
         >
           РЕЄСТРАЦІЯ
         </button>
-
       </div>
-
     </form>
   );
 }
