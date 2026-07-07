@@ -47,7 +47,7 @@
 }
 
 body{
-  background:var(--color-background);
+
   color:var(--color-text);
 }
 
@@ -61,10 +61,26 @@ button{
   cursor:pointer;
 }
 
-input,
-button{
-  outline:none;
+
+    .btn {
+    width: 125px;            /* Точна ширина з Figma */
+    height: 44px;            /* Точна висота з Figma */
+    border-radius: 16px;     /* Точний радіус з Figma */
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
+
+
+
 
 .flex{
     display: flex;
