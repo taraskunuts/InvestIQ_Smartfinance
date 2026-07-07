@@ -36,11 +36,9 @@
 .confirm-btn {
   background: #ffffff;
   border: 2px solid #eef2f7;
-  border-radius: 16px;
-  width: 125px;
-  height: 44px;
-  font-size: 12px;
-  font-weight: bold;
+
+ 
+ 
   color: #a0aec0;
   cursor: pointer;
   letter-spacing: 0.5px;

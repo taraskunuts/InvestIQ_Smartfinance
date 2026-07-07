@@ -1,0 +1,171 @@
+.transaction_form-container {
+    display: flex;
+    align-items: center;
+    width: 1060px;
+    height: 44px;
+    margin: 48px auto 0 auto;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+.date {
+    display: inline-flex;
+    align-items: center;
+
+    width: 115px;
+    height: 100%;
+    gap: 8px;
+    margin-left: 20px;
+    box-sizing: border-box;
+
+    flex-shrink: 0;
+}
+
+.calendar-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.date .react-datepicker-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.minimal-date-text {
+    background: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    color: #52555F;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-core {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 20px;
+
+}
+
+.inputs-combobox {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid #F5F6FB;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    height: 44px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.inputs-combobox {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid #F5F6FB;
+    border-radius: 16px;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+.input-desc {
+    width: 268px;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 20px;
+    font-size: 12px;
+    color: #52555F;
+    background: transparent;
+    border-radius: 16px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.input-desc::placeholder {
+    color: #C7CCDC;
+    font-weight: 400;
+}
+
+
+.cost-wrapper {
+    display: flex;
+    align-items: center;
+    width: 126px;
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.input-cost {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 700;
+    color: #52555F;
+    padding-right: 10px;
+}
+
+.input-cost::placeholder {
+    color: #C7CCDC;
+    font-weight: 400;
+}
+
+.calc-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.buttons-group {
+    display: flex;
+    gap: 15px;
+    margin-left: 85px;
+}
+
+.btn {
+    height: 44px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    width: 130px;
+    background-color: #FF751D;
+    border: none;
+    color: #FFFFFF;
+    box-shadow: 1px 3px 5px rgba(255, 117, 29, 0.3);
+}
+
+.btn-submit:hover {
+    background-color: #de6111;
+}
+
+.btn-clear {
+    width: 130px;
+    background-color: #FFFFFF;
+    border: 2px solid #F5F6FB;
+    color: #52555F;
+}
+
+.btn-clear:hover {
+    background-color: #F5F6FB;
+}

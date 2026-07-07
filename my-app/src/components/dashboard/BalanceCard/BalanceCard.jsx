@@ -33,7 +33,7 @@ const BalanceCard = () => {
       
       <div className="input-wrapper">
         <input type="text" value={balance} onChange ={handleChange} />
-        
+      {/*   
         {showTooltip && (
           <div className="tooltip-box">
             <div className="tooltip-arrow"></div>
@@ -41,10 +41,10 @@ const BalanceCard = () => {
             <p className="tooltip-text">{"Ви не можете витрачати гроші, поки їх у Вас немає :)"}</p>
 
           </div>
-        )}
+        )} */}
       </div>
 
-      <button className="confirm-btn" onClick={()=>setBalance('00.00 UAH')}>ПІДВЕРДИТИ</button>
+      <button className="confirm-btn btn"  onClick={()=>setBalance('00.00 UAH')}>ПІДВЕРДИТИ</button>
     </div>
   );
 };
