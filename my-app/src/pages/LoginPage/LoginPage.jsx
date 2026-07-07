@@ -1,13 +1,13 @@
 import "./LoginPage.css";
 
-import Header from "../../components/shared/Header/Header";
+import LoginHeader from "../../components/auth/LoginHeader/LoginHeader";
 import LoginForm from "../../components/auth/LoginForm/LoginForm";
 
 function LoginPage() {
   return (
     <div className="login-page">
 
-      <Header />
+      <LoginHeader />
 
       <div className="login-content">
 

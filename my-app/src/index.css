@@ -1,12 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
+:root {
+
+  /* Primary */
+  --color-primary: #000000;
+  --color-primary-light: #333333;
+
+  /* Accent */
+  --color-accent: #000000;
+  --color-accent-hover: #000000;
+
+  /* Background */
+  --color-background: #000000;
+  --color-surface: #000000;
+
+  /* Text */
+  --color-text: #000000;
+  --color-text-secondary: #000000;
+  --color-placeholder: #000000;
+
+  /* Border */
+  --color-border: #000000;
+
+  /* Status */
+  --color-success: #000000;
+  --color-error: #000000;
+  --color-warning: #000000;
+
+  /* Shadow */
+  --shadow-card: 0 8px 30px rgba(0,0,0,.08);
+
+  /* Radius */
+  --radius-small: 12px;
+  --radius-medium: 16px;
+  --radius-large: 30px;
+
+  /* Transition */
+  --transition: .25s;
 }
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Roboto",sans-serif;
+}
+
+body{
+  background:var(--color-background);
+  color:var(--color-text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+input,
+button{
+  outline:none;
+}
+
 .flex{
-    display: flex;
-} 
-/* import '../../../index.css'; */
+  display:flex;
+}

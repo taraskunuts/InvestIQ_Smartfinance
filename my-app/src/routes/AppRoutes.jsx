@@ -9,47 +9,21 @@ import {
 import LoginPage from "../pages/LoginPage/LoginPage";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import ReportPage from "../pages/ReportPage/ReportPage";
-import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Авторизація */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Dashboard (перший розробник) */}
-        <Route
-          path="/dashboard/*"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/dashboard/*" element={<DashboardPage />} />
 
-        {/* Report (твоя частина) */}
-        <Route
-          path="/report"
-          element={
-            <ProtectedRoute>
-              <ReportPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/report" element={<ReportPage />} />
 
-        {/* Початкова сторінка */}
-        <Route
-          path="/"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* 404 */}
-        <Route
-          path="*"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
 
       </Routes>
     </BrowserRouter>
