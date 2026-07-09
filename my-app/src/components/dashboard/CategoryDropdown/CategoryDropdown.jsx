@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './CategoryDropdown.css'; // Переконайтеся, що створили цей файл стилів
-
+import './CategoryDropdown.css';
+import '../../../index.css';
 const categories = [
     { value: 'transport', label: 'Транспорт' },
     { value: 'products', label: 'Продукти' },
@@ -15,20 +15,22 @@ const categories = [
     { value: 'other', label: 'Інше' }
 ];
 
-const CategoryDropdown = () => {
+const CategoryDropdown = ({ category, setCategory}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedLabel, setSelectedLabel] = useState('Категорія товару');
+    const currentCategory = categories.find(c => c.value === category);
+    const displayLabel = currentCategory ? currentCategory.label : 'Категорія товару';
 
-    const handleOptionClick = (label) => {
-        setSelectedLabel(label);
+    const handleOptionClick = (value) => {
+        setCategory(value);
         setIsOpen(false);
     };
+   
 
     return (
         <div className="category-dropdown-wrapper">
             <div className={`dropdown-select ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-                <span className={selectedLabel === 'Категорія товару' ? 'placeholder' : 'value'}>
-                    {selectedLabel}
+                 <span className={category === '' ? 'placeholder' : 'value'}>
+                    {displayLabel}
                 </span>
                 <span className={`arrow ${isOpen ? 'up' : 'down'}`}></span>
             </div>
@@ -38,7 +40,7 @@ const CategoryDropdown = () => {
                     {categories.map((option) => (
                         <li 
                             key={option.value} 
-                            onClick={() => handleOptionClick(option.label)}
+                            onClick={() => handleOptionClick(option.value)}
                             className="dropdown-item"
                         >
                             {option.label}

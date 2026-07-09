@@ -1,0 +1,141 @@
+.transaction-table-wrapper {
+  width: 715px;
+  max-height: 360px; 
+  background: #FFFFFF;
+  margin-left: 70px;
+  margin-top: 58px;
+  border-radius: 20px 20px 0px 0px;
+  overflow-y: auto; 
+  border-left: 2px solid #F5F6FB;
+  border-right: 2px solid #F5F6FB;
+  border-top: 2px solid #F5F6FB;
+}
+
+.transaction-table-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transaction-table-wrapper::-webkit-scrollbar-track {
+  background: #F5F6FB;
+}
+
+.transaction-table-wrapper::-webkit-scrollbar-thumb {
+  background: #C7CCDC;
+  border-radius: 3px;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table-header-row {
+  background-color: #F5F6FB;
+  height: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table-th {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #000000;
+  background-color: #F5F6FB; 
+  padding-left: 20px;
+}
+
+.table-body-row {
+  border-bottom: 2px solid #F5F6FB;
+  height: 40px;
+}
+
+.table-td {
+  font-size: 12px;
+  font-weight: 400;
+  color: #52555F;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 20px;
+}
+
+.col-date {
+  width: 90px;
+  padding-left: 20px;
+}
+
+.col-desc {
+  width: 220px;
+  padding-left: 10px;
+}
+
+.col-category {
+  width: 150px;
+  padding: 0 10px;
+}
+
+.col-amount {
+  width: 185px;
+  padding: 0 10px;
+}
+
+.col-delete {
+  width: 50px;
+  padding-right: 20px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.color-income {
+  color: #40B659;
+}
+
+.color-expense {
+  color: #E05555;
+}
+
+.btn-table-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn-table-delete:hover {
+  background-color: #F5F6FB;
+}
+
+.delete-icon-img {
+  width: 18px;
+  height: 18px;
+}
+
+.table-empty-cell {
+  text-align: center;
+  padding: 40px;
+  color: #A6ABB9;
+  font-size: 14px;
+}

@@ -63,9 +63,9 @@ button{
 
 
     .btn {
-    width: 125px;            /* Точна ширина з Figma */
-    height: 44px;            /* Точна висота з Figma */
-    border-radius: 16px;     /* Точний радіус з Figma */
+    width: 125px;            
+    height: 44px;        
+    border-radius: 16px;     
     border: none;
     outline: none;
     background: transparent;

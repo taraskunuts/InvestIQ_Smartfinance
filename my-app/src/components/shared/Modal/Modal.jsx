@@ -12,7 +12,7 @@ const Modal = () => {
                 
                 <button className="modal-close-x" onClick={handleClose}>&times;</button>
                 
-                <p className="modal-text">Ви впевнені?</p>
+                <p className="modal-text">Ви дійсно хочете вийти?</p>
                 
                 <div className="modal-buttons-group">
                     <button className="modal-btn btn-yes" onClick={closeModal}>ТАК</button>
