@@ -109,7 +109,7 @@ if (type === 'income') {
 
 const finalBalanceString = newBalanceValue.toFixed(2);
 
-dispatch(setBalance(finalBalanceString)); // відправляємо в редюсер
+dispatch(setBalance(finalBalanceString)); 
 localStorage.setItem('currentBalance', finalBalanceString)
     const finalDate = selectedDate
         ? selectedDate.toLocaleDateString('uk-UA')
