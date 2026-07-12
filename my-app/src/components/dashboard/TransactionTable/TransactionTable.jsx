@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../../../index.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,10 @@ import './TransactionTable.css';
 const TransactionTable = () => {
     const navigate = useNavigate();
     const transactions = useSelector(selectTransactions) || [];
-
+    useEffect(() => {
+        localStorage.setItem('currentBalance', JSON.stringify(transactions))
+     },
+        [transactions]);
     return (
         <div className="transaction-table-wrapper">
             <table className="transaction-table">

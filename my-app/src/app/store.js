@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import balanceReducer from '../redux/balance/balanceSlice';
-import transactionReducer from '../redux/transactions/transactionsSlice';
+import transactionsReducer from '../redux/transactions/transactionsSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    balance: balanceReducer,
-    transactions: transactionReducer,
+    transactions: transactionsReducer,
+    balance: balanceReducer,           
   },
 });
 

@@ -9,6 +9,8 @@ const BalanceCard = () => {
     const currentBalance = useSelector(selectBalance);
     const [showTooltip, setShowTooltip] = useState(true);
 
+   
+
     useEffect(() => {
         if (currentBalance) {
             setShowTooltip(false);
@@ -28,7 +30,9 @@ const BalanceCard = () => {
     const handleChange = (e) => {
         let val = e.target.value;
 
-        val = val.replace(',', '.');
+  
+        val = val.replace(' UAH', '').replace(',', '.');
+        
         if (val !== '' && !/^\d*\.?\d*$/.test(val)) {
             return;
         }
@@ -37,8 +41,18 @@ const BalanceCard = () => {
     };
 
     const handleConfirm = () => {
+
+        if (currentBalance && !isNaN(parseFloat(currentBalance))) {
+            const formatted = parseFloat(currentBalance).toFixed(2);
+            
+       
+            dispatch(setBalance(formatted));
+            localStorage.setItem('currentBalance', formatted);
+        }
         setShowTooltip(false);
     };
+
+    const displayValue = currentBalance ? `${currentBalance} UAH` : '';
 
     return (
         <div className='balance_rap-component flex'>
@@ -47,7 +61,7 @@ const BalanceCard = () => {
             <div className="input-wrapper">
                 <input 
                     type="text"  
-                    value={currentBalance} 
+                    value={displayValue} 
                     onChange={handleChange} 
                     placeholder='00.00 UAH' 
                 />

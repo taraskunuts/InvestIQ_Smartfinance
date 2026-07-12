@@ -1,6 +1,6 @@
 import "./TransactionForm.css"
 import '../../../index.css';
-import { useState } from 'react'
+import { useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../../redux/transactions/transactionsSlice.js';
 
@@ -11,8 +11,7 @@ import calculator from '../../../assets/icons/calculator.svg';
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
 
 import { useSelector } from 'react-redux';
-import { selectBalance } from '../../../redux/balance/balanceSlice.js'; // Вкажіть правильний шлях до вашого слайсу
-
+import { setBalance } from '../../../redux/balance/balanceSlice.js'; 
 
 
 
@@ -24,8 +23,9 @@ const TransactionForm = () => {
     const [error, setError] = useState('');
     const dispatch = useDispatch();
 
+    const currentBalance = useSelector(state => state.balance.value);
 
-    const currentBalance = useSelector(selectBalance);
+
 
 
     const handleDateChange = (date) => {
@@ -53,78 +53,86 @@ const TransactionForm = () => {
                 </div>
 
                 <form action="" className="form-core flex"
-                    onSubmit={(e) => {
-                        e.preventDefault();
+                   onSubmit={(e) => {
+    e.preventDefault();
 
-                        if (!description.trim()) {
-                            setError('Поле не може бути порожнім');
-                            return;
-                        }
-                        if (!category) {
-                            setError('Будь ласка, виберіть категорію товару');
-                            return;
-                        }
-                        if (!cost) {
-                            setError('Введіть суму');
-                            return;
-                        }
+    if (!description.trim()) {
+        setError('Поле не може бути порожнім');
+        return;
+    }
+    if (!category) {
+        setError('Будь ласка, виберіть категорію товару');
+        return;
+    }
+    if (!cost) {
+        setError('Введіть суму');
+        return;
+    }
+
+    let type = 'expense';
+    let cleanCost = cost;
+
+    if (cost.startsWith('+')) {
+        type = 'income';
+        cleanCost = cost.slice(1);
+    } else if (cost.startsWith('-')) {
+        type = 'expense';
+        cleanCost = cost.slice(1);
+    }
+
+    const num = parseFloat(cleanCost);
+
+    if (isNaN(num) || num < 1) {
+        setError('Мінімальна сума: 1');
+        return;
+    }
 
 
-                        let type = 'expense';
-                        let cleanCost = cost;
+    let numericBalance = 0;
+    if (currentBalance && typeof currentBalance === 'string' && !currentBalance.startsWith('[')) {
+        numericBalance = parseFloat(currentBalance.replace(' UAH', '').trim()) || 0;
+    } else if (typeof currentBalance === 'number') {
+        numericBalance = currentBalance;
+    }
 
-                        if (cost.startsWith('+')) {
-                            type = 'income';
-                            cleanCost = cost.slice(1);
-                        } else if (cost.startsWith('-')) {
-                            type = 'expense';
-                            cleanCost = cost.slice(1);
-                        }
-
-                        const num = parseFloat(cleanCost);
-
-                        if (isNaN(num) || num < 1) {
-                            setError('Мінімальна сума: 1');
-                            return;
-                        }
-
-                        const numericBalance = currentBalance
-                            ? parseFloat(currentBalance.replace(' UAH', '').trim())
-                            : 0;
-
-                        if (type === 'expense' && num > numericBalance) {
-                            setError('Звідки гроші');
-                            return;
-                        }
-                   let newBalanceValue = numericBalance;
-
+    if (type === 'expense' && num > numericBalance) {
+        setError('Звідки гроші');
+        return;
+    }
+    
+   let newBalanceValue = numericBalance;
 if (type === 'income') {
     newBalanceValue += num;
 } else {
     newBalanceValue -= num;
 }
 
-                        const finalDate = selectedDate
-                            ? selectedDate.toLocaleDateString('uk-UA')
-                            : today.toLocaleDateString('uk-UA');
+const finalBalanceString = newBalanceValue.toFixed(2);
 
-                        const transactionData = {
-                            id: Date.now(),
-                            date: finalDate,
-                            description: description,
-                            category: category,
-                            amount: num,
-                            type: type
-                        };
+dispatch(setBalance(finalBalanceString)); // відправляємо в редюсер
+localStorage.setItem('currentBalance', finalBalanceString)
+    const finalDate = selectedDate
+        ? selectedDate.toLocaleDateString('uk-UA')
+        : today.toLocaleDateString('uk-UA');
 
-                        dispatch(addTransaction(transactionData));
+    const transactionData = {
+        id: Date.now(),
+        date: finalDate,
+        description: description,
+        category: category,
+        amount: num,
+        type: type
+    };
 
-                        setError('');
-                        setCost('');
-                        setDescription('');
-                        setCategory('');
-                        setSelectedDate(null);
-                    }}
+    dispatch(addTransaction(transactionData));
+
+    setError('');
+    setCost('');
+    setDescription('');
+    setCategory('');
+    setSelectedDate(null);
+}}
+
                 >
                     <div className="inputs-combobox flex">
                         <input
