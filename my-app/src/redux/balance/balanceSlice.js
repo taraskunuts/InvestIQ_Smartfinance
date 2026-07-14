@@ -1,35 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialBalance = () => {
-  const saved = localStorage.getItem('currentBalance') || '';
-  if (saved.startsWith('[') || saved.startsWith('{')) {
-    return ''; 
+  const saved = localStorage.getItem('currentBalance');
+  if (!saved || saved.startsWith('[') || saved.startsWith('{')) {
+    return 0; 
   }
-  return saved;
+  return Number(saved) || 0;
 };
-
-const savedBalance = getInitialBalance();
 
 export const balanceSlice = createSlice({
   name: "balance",
   initialState: {   
-    value: savedBalance, 
-    isSet: !!savedBalance
+    value: getInitialBalance(), 
+    isSet: getInitialBalance() !== 0
   },
   reducers: {
     setBalance: (state, action) => {
-      if (typeof action.payload === 'object') {
-        console.error("Попытка записать объект в баланс:", action.payload);
+      if (action.payload === null || typeof action.payload === 'object') {
         return;
       }
-      state.value = action.payload;
+      const newValue = Number(action.payload);
+      if (isNaN(newValue)) return;
+      
+      state.value = newValue;
       state.isSet = true;
+      localStorage.setItem('currentBalance', String(newValue));
     }
   }
 });
 
 export const selectBalance = (state) => state.balance.value;
 export const selectIsSet = (state) => state.balance.isSet;
-
 export const { setBalance } = balanceSlice.actions;
 export default balanceSlice.reducer;
+

@@ -68,7 +68,6 @@ button{
     border-radius: 16px;     
     border: none;
     outline: none;
-    background: transparent;
     padding: 0;
     margin: 0;
     font-family: inherit;
@@ -84,5 +83,4 @@ button{
 
 .flex{
     display: flex;
-} 
-/* import '../../../index.css'; */
+}/* import '../../../index.css'; */
