@@ -6,8 +6,6 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Тимчасово просто відкриваємо Dashboard
     navigate("/dashboard");
   };
 
