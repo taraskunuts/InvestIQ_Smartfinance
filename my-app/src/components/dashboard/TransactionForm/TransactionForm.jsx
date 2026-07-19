@@ -1,6 +1,6 @@
-import "./TransactionForm.css";
+import "./TransactionForm.css"
 import '../../../index.css';
-import { useState } from 'react';
+import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../../redux/transactions/transactionsSlice.js';
 
@@ -10,6 +10,11 @@ import calendar from '../../../assets/icons/calendar.svg';
 import calculator from '../../../assets/icons/calculator.svg';
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
 
+import { useSelector } from 'react-redux';
+import { setBalance } from '../../../redux/balance/balanceSlice.js';
+
+
+
 const TransactionForm = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [description, setDescription] = useState('');
@@ -18,62 +23,99 @@ const TransactionForm = () => {
     const [error, setError] = useState('');
     const dispatch = useDispatch();
 
+    const currentBalance = useSelector(state => state.balance.value);
+
+
+
+
     const handleDateChange = (date) => {
-        setSelectedDate(date);
+        setSelectedDate(date)
+    }
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!description.trim()) {
+        setError('Поле не може бути порожнім');
+        return;
+    }
+    if (!category) {
+        setError('Будь ласка, виберіть категорію товару');
+        return;
+    }
+    if (!cost) {
+        setError('Введіть суму');
+        return;
+    }
+
+    let type = 'expense';
+    let cleanCost = cost;
+
+    if (cost.startsWith('+')) {
+        type = 'income';
+        cleanCost = cost.slice(1);
+    } else if (cost.startsWith('-')) {
+        type = 'expense';
+        cleanCost = cost.slice(1);
+    }
+
+    const num = parseFloat(cleanCost);
+
+    if (isNaN(num) || num < 1) {
+        setError('Мінімальна сума: 1');
+        return;
+    }
+
+    let numericBalance = 0;
+    if (currentBalance && typeof currentBalance === 'string' && !currentBalance.startsWith('[')) {
+        numericBalance = parseFloat(currentBalance.replace(' UAH', '').trim()) || 0;
+    } else if (typeof currentBalance === 'number') {
+        numericBalance = currentBalance;
+    }
+
+    if (type === 'expense' && num > numericBalance) {
+        setError('Звідки гроші');
+        return;
+    }
+
+    let newBalanceValue = numericBalance;
+    if (type === 'income') {
+        newBalanceValue += num;
+    } else {
+        newBalanceValue -= num;
+    }
+
+    const finalBalanceNumber = Math.round(newBalanceValue * 100) / 100;
+
+    dispatch(setBalance(finalBalanceNumber));
+
+    const finalDate = selectedDate
+        ? selectedDate.toLocaleDateString('uk-UA')
+        : today.toLocaleDateString('uk-UA');
+
+    const transactionData = {
+        id: Date.now(),
+        date: finalDate,
+        description: description,
+        category: category,
+        amount: num,
+        type: type
     };
+
+    dispatch(addTransaction(transactionData));
+
+    setError('');
+    setCost('');
+    setDescription('');
+    setCategory('');
+    setSelectedDate(null);
+};
 
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
     const todayPlaceholder = `${day}.${month}.${year}`;
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!description.trim() || !category || !cost) {
-            setError('Заповніть усі поля');
-            return;
-        }
-
-        let type = 'expense';
-        let cleanCost = cost;
-
-        if (cost.startsWith('+')) { 
-            type = 'income'; 
-            cleanCost = cost.slice(1); 
-        } else if (cost.startsWith('-')) { 
-            type = 'expense'; 
-            cleanCost = cost.slice(1); 
-        }
-
-        const num = parseFloat(cleanCost);
-        if (isNaN(num) || num < 1) {
-            setError('Мінімальна сума: 1');
-            return;
-        }
-
-        const finalDate = selectedDate 
-            ? selectedDate.toLocaleDateString('uk-UA') 
-            : today.toLocaleDateString('uk-UA');
-
-        const transactionData = {
-            id: Date.now(),
-            date: finalDate,
-            description: description.trim(),
-            category: category,
-            amount: num,
-            type: type
-        };
-
-        dispatch(addTransaction(transactionData)); 
-
-        setError(''); 
-        setCost(''); 
-        setDescription(''); 
-        setCategory(''); 
-        setSelectedDate(null);
-    };
 
     return (
         <div className='transaction_form-container flex' style={{ display: 'block' }}>
@@ -89,7 +131,8 @@ const TransactionForm = () => {
                     />
                 </div>
 
-                <form className="form-core flex" onSubmit={handleSubmit}>
+               <form className="form-core flex" onSubmit={handleSubmit}>
+
                     <div className="inputs-combobox flex">
                         <input
                             type="text"
@@ -104,13 +147,10 @@ const TransactionForm = () => {
                             }}
                         />
 
-                        <CategoryDropdown 
-                            category={category} 
-                            setCategory={(val) => {
-                                setCategory(val);
-                                setError('');
-                            }} 
-                        />
+                        <CategoryDropdown category={category} setCategory={(val) => {
+                            setCategory(val);
+                            setError('');
+                        }} />
 
                         <div className="cost-wrapper flex">
                             <input
@@ -119,10 +159,14 @@ const TransactionForm = () => {
                                 placeholder="0.00"
                                 value={cost}
                                 onChange={(e) => {
-                                    let val = e.target.value.replace(',', '.');
+                                    let val = e.target.value;
+
+                                    val = val.replace(',', '.');
+
                                     if (val !== '' && !/^[+-]?\d*\.?\d*$/.test(val)) {
                                         return;
                                     }
+
                                     setCost(val);
 
                                     let checkVal = val;
@@ -130,29 +174,28 @@ const TransactionForm = () => {
                                         checkVal = val.slice(1);
                                     }
 
-                                    const numCheck = parseFloat(checkVal);
+                                    const num = parseFloat(checkVal);
+
                                     if (val === '') {
                                         setError('Поле не може бути порожнім');
                                     } else if (val === '+' || val === '-') {
                                         setError('Введіть число після знаку');
-                                    } else if (isNaN(numCheck)) {
+                                    } else if (isNaN(num)) {
                                         setError('Введіть коректне число');
-                                    } else if (numCheck < 1) {
+                                    } else if (num < 1) {
                                         setError('Мінімальна сума: 1');
                                     } else {
                                         setError('');
                                     }
                                 }}
                             />
-                            <img src={calculator} alt="Калькулятор" />
+                            <img src={calculator} alt="" />
                         </div>
                     </div>
 
                     <div className="buttons-group flex">
-                        <button type="submit" className="btn btn-submit">ВВЕСТИ</button>
-                        <button 
-                            type="button" 
-                            className="btn btn-clear"
+                        <button type="submit" className="btn btn-submit" >ВВЕСТИ</button>
+                        <button type="button" className="btn btn-clear"
                             onClick={() => {
                                 setDescription('');
                                 setCost('');
@@ -160,9 +203,7 @@ const TransactionForm = () => {
                                 setError('');
                                 setCategory('');
                             }}
-                        >
-                            ОЧИСТИТИ
-                        </button>
+                        >ОЧИСТИТИ</button>
                     </div>
                 </form>
             </div>
@@ -171,14 +212,15 @@ const TransactionForm = () => {
                 <span className="info-text" style={{ color: '#A6ABB9', fontSize: '12px', display: 'block', marginBottom: '4px', fontWeight: '400' }}>
                     Напишіть +, якщо це дохід, або -, якщо витрата
                 </span>
+
                 {error && (
-                    <span className="error-text" style={{ color: 'red', fontSize: '12px', fontWeight: '500', display: 'block' }}>
+                    <span className="error-text" style={{ color: 'red', fontSize: '12px', display: 'block', fontWeight: '400' }}>
                         {error}
                     </span>
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default TransactionForm;
