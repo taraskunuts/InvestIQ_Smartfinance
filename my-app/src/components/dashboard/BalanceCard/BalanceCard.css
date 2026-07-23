@@ -1,17 +1,16 @@
 .balance_rap-component.flex {
   display: flex;
   align-items: center;
-
   background-color: #F2F5FC;
   padding-top: 40px;
   justify-content: center;
 }
 
 .balance-label {
-
-  color: #52555FB2;
+  color: var(--color-text);
   font-size: 12px;
   font-weight: 500;
+  opacity: 0.7;
 }
 
 .input-wrapper {
@@ -20,35 +19,44 @@
 }
 
 .balance_rap-component input {
-  background: #ffffff;
+  background: var(--color-surface);
   border: 2px solid #eef2f7;
-  border-radius: 16px;
+  border-radius: var(--radius-medium);
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  color: #000000;
+  color: var(--color-primary);
   outline: none;
   width: 140px;
-  margin-left: 21px ;
+  margin-left: 21px;
+}
+
+.balance_rap-component input:disabled {
+  background: var(--color-background);
+  color: var(--color-text);
+  cursor: not-allowed;
 }
 
 .confirm-btn {
-  background: #ffffff;
+  background: var(--color-surface);
   border: 2px solid #eef2f7;
-
- 
- 
-  color: #a0aec0;
+  color: var(--color-placeholder);
   cursor: pointer;
   letter-spacing: 0.5px;
-  transition: all 0.2s;
+  transition: all var(--transition);
   margin-left: 15px;
 }
 
-.confirm-btn:hover {
+.confirm-btn:hover:not(:disabled) {
   border-color: #cbd5e1;
-  color: #718096;
+  color: var(--color-text);
+}
+
+.confirm-btn:disabled {
+  background: var(--color-background);
+  color: var(--color-placeholder);
+  cursor: not-allowed;
 }
 
 .tooltip-box {
@@ -58,7 +66,7 @@
   transform: translateX(-50%);
   z-index: 10;
   background: linear-gradient(135deg, #0d2342 0%, #061124 100%);
-  color: #ffffff;
+  color: var(--color-surface);
   padding: 30px 41px;
   border-radius: 24px;
   width: 294px;
@@ -66,18 +74,15 @@
 }
 
 .tooltip-title {
-
   font-size: 14px;
-  width: 400;
-  font-weight: normal;
+  font-weight: 400;
   line-height: 1.4;
   margin: 0 0 8px 0;
 }
 
 .tooltip-text {
-
   font-size: 12px;
-  color: #a0aec0;
+  color: var(--color-placeholder);
   line-height: 1.4;
   margin: 0;
 }

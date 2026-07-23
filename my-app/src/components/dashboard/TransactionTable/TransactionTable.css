@@ -1,14 +1,14 @@
 .transaction-table-wrapper {
   width: 715px;
   max-height: 360px; 
-  background: #FFFFFF;
+  background: var(--color-surface);
   margin-left: 70px;
   margin-top: 58px;
   border-radius: 20px 20px 0px 0px;
   overflow-y: auto; 
-  border-left: 2px solid #F5F6FB;
-  border-right: 2px solid #F5F6FB;
-  border-top: 2px solid #F5F6FB;
+  border-left: 2px solid var(--color-background);
+  border-right: 2px solid var(--color-background);
+  border-top: 2px solid var(--color-background);
 }
 
 .transaction-table-wrapper::-webkit-scrollbar {
@@ -16,11 +16,11 @@
 }
 
 .transaction-table-wrapper::-webkit-scrollbar-track {
-  background: #F5F6FB;
+  background: var(--color-background);
 }
 
 .transaction-table-wrapper::-webkit-scrollbar-thumb {
-  background: #C7CCDC;
+  background: var(--color-placeholder);
   border-radius: 3px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .table-header-row {
-  background-color: #F5F6FB;
+  background-color: var(--color-background);
   height: 40px;
   position: sticky;
   top: 0;
@@ -43,20 +43,20 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: #000000;
-  background-color: #F5F6FB; 
+  color: var(--color-primary);
+  background-color: var(--color-background); 
   padding-left: 20px;
 }
 
 .table-body-row {
-  border-bottom: 2px solid #F5F6FB;
+  border-bottom: 2px solid var(--color-background);
   height: 40px;
 }
 
 .table-td {
   font-size: 12px;
   font-weight: 400;
-  color: #52555F;
+  color: var(--color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -105,11 +105,11 @@
 }
 
 .color-income {
-  color: #40B659;
+  color: var(--color-success);
 }
 
 .color-expense {
-  color: #E05555;
+  color: var(--color-error);
 }
 
 .btn-table-delete {
@@ -125,7 +125,7 @@
 }
 
 .btn-table-delete:hover {
-  background-color: #F5F6FB;
+  background-color: var(--color-background);
 }
 
 .delete-icon-img {
@@ -136,6 +136,6 @@
 .table-empty-cell {
   text-align: center;
   padding: 40px;
-  color: #A6ABB9;
+  color: var(--color-placeholder);
   font-size: 14px;
 }

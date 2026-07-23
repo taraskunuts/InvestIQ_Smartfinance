@@ -1,0 +1,44 @@
+.summary-container {
+  width: 330px;
+  background-color: var(--color-background);
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  font-family: sans-serif;
+  justify-self: left;
+}
+
+.summary-header {
+  background-color: var(--color-background);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding: 15px 0;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--color-surface);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 2px solid var(--color-surface);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-month {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.summary-amount {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text);
+}

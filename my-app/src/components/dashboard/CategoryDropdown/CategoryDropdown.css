@@ -2,10 +2,10 @@
     position: relative;
     width: 168px;
     height: 100%;
-    border-left: 2px solid #F5F6FB;
-    border-right: 2px solid #F5F6FB;
+    border-left: 2px solid var(--color-background);
+    border-right: 2px solid var(--color-background);
     box-sizing: border-box;
-    background-color: #FFFFFF;
+    background-color: var(--color-surface);
 }
 
 .dropdown-select {
@@ -20,8 +20,7 @@
 }
 
 .dropdown-select .placeholder {
-    color: #C7CCDC;
- 
+    color: var(--color-placeholder);
     font-size: 12px;
     font-weight: 400;
     line-height: 100%;
@@ -29,8 +28,7 @@
 }
 
 .dropdown-select .value {
-    color: #52555F;
- 
+    color: var(--color-text);
     font-size: 12px;
     font-weight: 400;
     line-height: 100%;
@@ -38,11 +36,11 @@
 }
 
 .arrow {
-    border: solid #A6ABB9;
+    border: solid var(--color-placeholder);
     border-width: 0 1.5px 1.5px 0;
     display: inline-block;
     padding: 3px;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition) ease;
 }
 
 .arrow.down { transform: rotate(45deg); }
@@ -55,11 +53,11 @@
     width: calc(100% + 4px);
     max-height: 240px;
     overflow-y: auto;
-    background-color: #FFF;
-    border: 2px solid #F5F6FB;
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-background);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: var(--radius-medium);
+    border-bottom-right-radius: var(--radius-medium);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -68,15 +66,14 @@
 
 .dropdown-item {
     padding: 10px 20px;
-    color: #C7CCDC;
-
+    color: var(--color-placeholder);
     font-size: 12px;
     font-weight: 400;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--transition);
 }
 
 .dropdown-item:hover {
-    background-color: #F5F6FB;
-    color: #52555F;
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
