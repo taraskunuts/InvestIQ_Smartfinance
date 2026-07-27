@@ -1,0 +1,44 @@
+.income-toggle{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:18px;
+
+}
+
+.income-toggle button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--color-text);
+
+}
+
+.income-toggle button.active{
+
+    color:orange;
+
+}
+
+.income-toggle span{
+
+    font-size:20px;
+
+    color:#d0d0d0;
+
+}
