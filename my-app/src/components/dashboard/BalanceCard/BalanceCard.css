@@ -38,19 +38,26 @@
   cursor: not-allowed;
 }
 
+
 .confirm-btn {
-  background: var(--color-surface);
-  border: 2px solid #eef2f7;
-  color: var(--color-placeholder);
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: all var(--transition);
-  margin-left: 15px;
+     margin-left: 15px;
+    width: 130px;
+    background-color: #FF751D;
+    border: none;
+    color: var(--color-surface);
+    box-shadow: 1px 3px 5px rgba(255, 117, 29, 0.3);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.confirm-btn:hover {
+    background-color: #de6111;
+     color: var(--color-surface);
 }
 
 .confirm-btn:hover:not(:disabled) {
   border-color: #cbd5e1;
-  color: var(--color-text);
+
 }
 
 .confirm-btn:disabled {
