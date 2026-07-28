@@ -3,7 +3,7 @@
   align-items: center;
   background-color: #F2F5FC;
   padding-top: 40px;
-  justify-content: center;
+
 }
 
 .balance-label {
@@ -11,11 +11,13 @@
   font-size: 12px;
   font-weight: 500;
   opacity: 0.7;
+   margin-left: 35%;
 }
 
 .input-wrapper {
   position: relative;
   display: inline-block;
+ 
 }
 
 .balance_rap-component input {
@@ -104,4 +106,27 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #0d2342;
+}
+.report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px; 
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    margin-left: 174px;
+    
+    transition: color 0.2s ease;
+}
+
+.report-link:hover {
+    color: #FF751D;
+}
+
+.report-link-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
