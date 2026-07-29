@@ -1,4 +1,5 @@
 import "./StatisticsChart.css";
+import '../../../index.css';
 
 import {
     BarChart,

@@ -22,7 +22,7 @@
 
 .report-top{
     display:flex;
-    justify-content:space-between;
+    /* justify-content:space-between; */
     align-items:flex-end;
 
     margin-bottom:30px;
@@ -32,7 +32,7 @@
     border:none;
     background:none;
     cursor:pointer;
-
+    margin-left: 100px;
     font-size:14px;
     color:var(--color-text);
 }

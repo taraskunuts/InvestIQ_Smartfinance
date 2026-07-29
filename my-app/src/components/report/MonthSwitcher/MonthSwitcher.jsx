@@ -1,5 +1,6 @@
 import "./MonthSwitcher.css";
 import { useState } from "react";
+import '../../../index.css';
 
 const months = [
   "Січень",

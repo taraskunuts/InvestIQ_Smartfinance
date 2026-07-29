@@ -1,4 +1,5 @@
 import "./LoginPage.css";
+import '../../index.css';
 
 import LoginHeader from "../../components/auth/LoginHeader/LoginHeader";
 import LoginForm from "../../components/auth/LoginForm/LoginForm";

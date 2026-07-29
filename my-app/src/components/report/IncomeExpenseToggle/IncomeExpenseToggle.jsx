@@ -1,5 +1,6 @@
 import "./IncomeExpenseToggle.css";
 import { useState } from "react";
+import '../../../index.css';
 
 function IncomeExpenseToggle() {
 

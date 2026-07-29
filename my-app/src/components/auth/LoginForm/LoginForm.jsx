@@ -150,7 +150,7 @@ function LoginForm() {
 
           type="submit"
 
-          className="login-btn"
+          className="login-btn btn"
 
           disabled={!isValid}
 
@@ -167,7 +167,7 @@ function LoginForm() {
 
           type="button"
 
-          className="register-btn"
+          className="register-btn btn"
 
         >
 

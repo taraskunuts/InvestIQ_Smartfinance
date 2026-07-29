@@ -1,4 +1,5 @@
 import "./CategoryGrid.css";
+import '../../../index.css';
 
 import { useSelector } from "react-redux";
 

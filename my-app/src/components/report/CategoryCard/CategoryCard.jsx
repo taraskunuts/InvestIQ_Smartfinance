@@ -1,4 +1,6 @@
 import "./CategoryCard.css";
+import '../../../index.css';
+
 
 function CategoryCard({
 
