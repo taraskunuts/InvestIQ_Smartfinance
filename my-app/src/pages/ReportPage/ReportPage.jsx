@@ -1,73 +1,99 @@
 import "./ReportPage.css";
 
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../../components/shared/Header/Header";
 import MonthSwitcher from "../../components/report/MonthSwitcher/MonthSwitcher";
 import CategoryGrid from "../../components/report/CategoryGrid/CategoryGrid";
-import BalanceCard from "../../components/dashboard/BalanceCard/BalanceCard";
 import StatisticsChart from "../../components/report/StatisticsChart/StatisticsChart";
-import BigLoginBackground from "../../assets/icons/Big_login_background.svg";
+import BalanceCard from "../../components/dashboard/BalanceCard/BalanceCard";
 
+import { useSelector } from "react-redux";
 import { selectTransactions } from "../../redux/transactions/transactionsSlice";
 
 function ReportPage() {
-  const [selectedCategory, setSelectedCategory] = useState("products");
-  const transactions = useSelector(selectTransactions);
 
-  const totalExpense = transactions
-    .filter((item) => item.type === "expense")
-    .reduce((sum, item) => sum + item.amount, 0);
+    const transactions = useSelector(selectTransactions);
 
-  const totalIncome = transactions
-    .filter((item) => item.type === "income")
-    .reduce((sum, item) => sum + item.amount, 0);
+    const [mode, setMode] = useState("expense");
+    const [selectedCategory, setSelectedCategory] = useState("products");
 
-  return (
-    <div className="report-page">
-      <div className="page-big-background">
-        <img src={BigLoginBackground} alt="" />
-      </div>
-      <Header />
+    const totalExpense = transactions
+        .filter(item => item.type === "expense")
+        .reduce((sum, item) => sum + item.amount, 0);
 
-      <main className="report-container">
-        <section className="report-top">
-          <Link to="/dashboard" className="back-btn">
-            ← Повернутись на головну
-          </Link>
+    const totalIncome = transactions
+        .filter(item => item.type === "income")
+        .reduce((sum, item) => sum + item.amount, 0);
 
-          <BalanceCard />
+    return (
 
-          <MonthSwitcher />
-        </section>
+        <div className="report-page">
 
-        <section className="summary">
-          <div className="expense-box">
-            <span>Витрати:</span>
+            <Header />
 
-            <strong>{totalExpense.toFixed(2)} грн</strong>
-          </div>
+            <main className="report-container">
 
-          <div className="divider"></div>
+                <section className="report-top">
 
-          <div className="income-box">
-            <span>Доходи:</span>
+                    <Link
+                        to="/dashboard"
+                        className="back-btn"
+                    >
+                        ← Повернутись на головну
+                    </Link>
 
-            <strong>{totalIncome.toFixed(2)} грн</strong>
-          </div>
-        </section>
+                    <BalanceCard />
 
-        <CategoryGrid
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
+                    <MonthSwitcher />
 
-        <StatisticsChart category={selectedCategory} />
-      </main>
-    </div>
-  );
+                </section>
+
+                <section className="summary">
+
+                    <div className="expense-box">
+
+                        <span>Витрати:</span>
+
+                        <strong>
+                            {totalExpense.toFixed(2)} грн
+                        </strong>
+
+                    </div>
+
+                    <div className="divider"></div>
+
+                    <div className="income-box">
+
+                        <span>Доходи:</span>
+
+                        <strong>
+                            {totalIncome.toFixed(2)} грн
+                        </strong>
+
+                    </div>
+
+                </section>
+
+                <CategoryGrid
+                    mode={mode}
+                    setMode={setMode}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                />
+
+                <StatisticsChart
+                    category={selectedCategory}
+                    mode={mode}
+                />
+
+            </main>
+
+        </div>
+
+    );
+
 }
 
 export default ReportPage;

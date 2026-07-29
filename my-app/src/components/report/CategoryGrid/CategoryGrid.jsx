@@ -1,6 +1,5 @@
 import "./CategoryGrid.css";
 
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import CategoryCard from "../CategoryCard/CategoryCard";
@@ -12,14 +11,14 @@ import {
 
 import { selectTransactions } from "../../../redux/transactions/transactionsSlice";
 
-
-function CategoryGrid({ selectedCategory, setSelectedCategory }){
-
-    const [mode,setMode]=useState("expense");
+function CategoryGrid({
+    selectedCategory,
+    setSelectedCategory,
+    mode,
+    setMode
+}) {
 
     const transactions = useSelector(selectTransactions);
-
-
 
     const calculateAmount = (categoryId) => {
 
@@ -32,92 +31,66 @@ function CategoryGrid({ selectedCategory, setSelectedCategory }){
                         : item.type === "income"
                 )
             )
-            .reduce(
-                (sum,item)=>sum + item.amount,
-                0
-            );
+            .reduce((sum, item) => sum + item.amount, 0);
 
     };
-
-
 
     const categories = (
         mode === "expense"
             ? expenseCategories
             : incomeCategories
-    )
-    .map(category => ({
+    ).map(category => ({
         ...category,
         amount: calculateAmount(category.id)
     }));
 
-
-
-    return(
+    return (
 
         <section className="category-container">
-
 
             <div className="category-header">
 
                 <button
                     className="arrow-btn"
-                    onClick={()=>setMode("expense")}
+                    onClick={() => setMode("expense")}
                 >
                     &#8249;
                 </button>
 
-
                 <h3>
-                    {mode==="expense"
-                        ?"ВИТРАТИ"
-                        :"ДОХОДИ"}
+                    {mode === "expense"
+                        ? "ВИТРАТИ"
+                        : "ДОХОДИ"}
                 </h3>
-
 
                 <button
                     className="arrow-btn"
-                    onClick={()=>setMode("income")}
+                    onClick={() => setMode("income")}
                 >
                     &#8250;
                 </button>
 
             </div>
 
-
-
             <div className="category-grid">
 
-                {
-                    categories.map(category=>(
+                {categories.map(category => (
 
-                        <CategoryCard
+                    <CategoryCard
+                        key={category.id}
+                        category={category}
+                        active={selectedCategory === category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                    />
 
-                            key={category.id}
-
-                            category={category}
-
-                            active={
-                                selectedCategory === category.id
-                            }
-
-                            onClick={() =>
-                                setSelectedCategory(category.id)
-                            }
-
-                        />
-
-                    ))
-                }
+                ))}
 
             </div>
-
 
         </section>
 
     );
 
 }
-
 
 export default CategoryGrid;

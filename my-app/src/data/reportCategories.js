@@ -92,15 +92,6 @@ export const expenseCategories = [
   },
 ];
 
-export const incomeCategories = [
-  {
-    id: "salary",
-    title: "ЗП",
-    amount: 0,
-  },
-  {
-    id: "extra",
-    title: "ДОД. ДОХІД",
-    amount: 0,
-  },
-]; //CHANGE THE AMOUNT TO TAKE FROM ID LATER!!!1!!112121234A3%s^432!#%RSZCFDSVBFZSD
+export const incomeCategories = expenseCategories.map(category => ({
+  ...category,
+}));
