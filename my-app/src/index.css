@@ -1,85 +1,72 @@
-@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-  /* Заголовки таблиць та основний чорний */
   --color-primary: #000000;
-  
-  /* Текст в інпутах та елементах порожніх комірок */
   --color-placeholder: #C7CCDC;
-  
-  /* Основний сірий фон для таблиць та сторінки */
   --color-background: #F5F6FB;
-  
-  /* Чистий білий для фону контенту */
   --color-surface: #FFFFFF;
-  
-  /* Колір звичайного тексту в додатку */
   --color-text: #52555F;
-
-  /* Статусні кольори для доходів та витрат */
   --color-success: #40B659;
   --color-error: #E05555;
 
-  /* Радіуси та анімації */
   --radius-small: 12px;
   --radius-medium: 16px;
   --radius-large: 30px;
   --transition: .25s;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
 
-body{
-  background-color: var(--color-background);
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-background);
   color: var(--color-text);
 }
 
-input, select, textarea {
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
   font-family: inherit;
   color: var(--color-text);
-  background-color: var(--color-surface);
 }
 
-input::placeholder, 
+input::placeholder,
 textarea::placeholder {
   color: var(--color-placeholder);
 }
 
-a{
-  text-decoration: none;
-  color: inherit;
-}
-
-button{
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.btn {
-  width: 125px;            
-  height: 44px;        
-  border-radius: var(--radius-medium);     
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  transition: background-color var(--transition);
-}
-
-.flex{
+.flex {
   display: flex;
 }
 
-/* import '../../../index.css'; */
-
+.btn {
+  width: 125px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-medium);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background .25s;
+}

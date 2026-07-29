@@ -25,7 +25,7 @@
 }
 
 .month-controls button:hover{
-    color:var(--color-success);
+    color:#FF751D;
 }
 
 .month-info{
@@ -39,5 +39,4 @@
 
 .month-info p{
     font-size:14px;
-    color:var(--color-placeholder);
 }

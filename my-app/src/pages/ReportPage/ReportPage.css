@@ -1,44 +1,53 @@
-.report-top{
+.report-page {
+    position: relative;
+    min-height: 100vh;
+}
 
+.page-big-background {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.report-container {
+    position: relative;
+    z-index: 1;
+
+    padding-left: 110px;
+    padding-right: 110px;
+    padding-bottom: 74px;
+}
+
+.report-top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:flex-end;
 
     margin-bottom:30px;
-
 }
 
 .back-btn{
-
     border:none;
     background:none;
-
     cursor:pointer;
 
     font-size:14px;
-
     color:var(--color-text);
-
 }
 
 .balance-block{
-
     display:flex;
     align-items:center;
     gap:15px;
-
 }
 
 .balance-block h2{
-
     font-size:28px;
-
 }
 
-
-
 .summary{
-
     margin-top:25px;
 
     background:white;
@@ -50,43 +59,28 @@
     display:flex;
     justify-content:space-evenly;
     align-items:center;
-
 }
 
 .summary span{
-
     display:block;
-
     margin-bottom:8px;
-
     color:gray;
-
 }
 
 .summary strong{
-
     font-size:22px;
-
 }
 
 .expense-box strong{
-
     color:#E53935;
-
 }
 
 .income-box strong{
-
     color:#43A047;
-
 }
 
 .divider{
-
     width:1px;
-
     height:50px;
-
     background:#E5E5E5;
-
 }

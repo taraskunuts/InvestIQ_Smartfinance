@@ -9,7 +9,7 @@ function LoginHeader() {
 
                 <img src={logo} alt="logo"/>
 
-                <h2>INVESTIQ</h2>
+                <h2 className="login-logo-text">INVESTIQ</h2>
 
             </div>
 

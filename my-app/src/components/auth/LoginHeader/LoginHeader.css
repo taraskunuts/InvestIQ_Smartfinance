@@ -9,6 +9,15 @@
   align-items: center;
   gap: 10px;
 }
+.login-logo-text{
+  position:absolute;
+  left:54px;
+  top: 29px;
+  font-size: 19px;
+  font-weight: 800;
+  color:black;
+  letter-spacing: 5%;
+}
 
 .login-logo img {
   width: 42px;

@@ -1,6 +1,17 @@
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
-export default function GoogleLoginButton() {
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { login } from "../../../redux/auth/authSlice";
+
+
+function GoogleLoginButton() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     return (
 
@@ -8,9 +19,30 @@ export default function GoogleLoginButton() {
 
             onSuccess={(credentialResponse) => {
 
-                console.log(credentialResponse);
+
+                const user = jwtDecode(
+                    credentialResponse.credential
+                );
+
+
+                console.log("Google user:", user);
+
+
+
+                dispatch(
+                    login({
+                        email: user.email,
+                        name: user.name
+                    })
+                );
+
+
+
+                navigate("/dashboard");
+
 
             }}
+
 
             onError={() => {
 
@@ -23,3 +55,6 @@ export default function GoogleLoginButton() {
     );
 
 }
+
+
+export default GoogleLoginButton;
