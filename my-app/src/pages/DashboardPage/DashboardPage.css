@@ -39,3 +39,71 @@
   width: 330px;
   margin-right: 45px;
 }
+ /* Обгортка для центрування контенту під балансом */
+.dashboard-content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Контейнер для вкладок */
+.type-toggle-container {
+    display: flex;
+    margin-bottom: 0; /* Важливо: прибираємо відступ знизу, щоб вкладки торкалися білої плашки */
+}
+
+/* Базовий стиль для обох вкладок */
+.toggle-btn {
+    width: 138px;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+    border-radius: 20px 20px 0px 0px; 
+    
+    
+    background-color: #FAFBFD;
+    color: #000000;
+    transition: all 0.2s ease;
+}
+
+
+.toggle-btn.active {
+    background-color: #FFFFFF;
+    position: relative;
+    z-index: 3; 
+}
+
+.expense-tab.active {
+    color: #FF751D; 
+}
+
+
+.income-tab.active {
+   color: #FF751D; 
+}
+
+
+.white-board-container {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    
+
+    border-radius: 0px 30px 30px 30px; 
+    
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+    margin-top: -1px; 
+}
