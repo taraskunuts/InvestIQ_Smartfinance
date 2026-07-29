@@ -43,10 +43,10 @@ function DashboardPage() {
                     </button>
                 </div>
 
-                {/* 2. Основна біла дошка */}
+                
                 <div className="white-board-container">
                     <div className="form-row-section">
-                        {/* Передаємо поточний тип вкладки у форму */}
+                     
                         <TransactionForm type={transactionType} />
                     </div>
                     
