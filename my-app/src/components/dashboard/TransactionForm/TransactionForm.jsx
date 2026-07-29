@@ -1,7 +1,7 @@
 import "./TransactionForm.css"
 import '../../../index.css';
-import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react' // 1. Додали useEffect
+import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from '../../../redux/transactions/transactionsSlice.js';
 
 import DatePicker from "react-datepicker";
@@ -9,13 +9,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import calendar from '../../../assets/icons/calendar.svg';
 import calculator from '../../../assets/icons/calculator.svg';
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
-
-import { useSelector } from 'react-redux';
 import { setBalance } from '../../../redux/balance/balanceSlice.js';
 
-
-
-const TransactionForm = () => {
+// 2. Приймаємо пропс 'type' (який дорівнює 'expense' або 'income')
+const TransactionForm = ({ type }) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [description, setDescription] = useState('');
     const [cost, setCost] = useState('');
@@ -25,91 +22,85 @@ const TransactionForm = () => {
 
     const currentBalance = useSelector(state => state.balance.value);
 
-
-
+    // 3. Автоматично очищаємо форму та помилки, коли користувач міняє вкладку
+    useEffect(() => {
+        setError('');
+        setCost('');
+        setCategory('');
+    }, [type]);
 
     const handleDateChange = (date) => {
         setSelectedDate(date)
     }
 
     const handleSubmit = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    if (!description.trim()) {
-        setError('Поле не може бути порожнім');
-        return;
-    }
-    if (!category) {
-        setError('Будь ласка, виберіть категорію товару');
-        return;
-    }
-    if (!cost) {
-        setError('Введіть суму');
-        return;
-    }
+        if (!description.trim()) {
+            setError('Поле не може бути порожнім');
+            return;
+        }
+        if (!category) {
+            setError('Будь ласка, виберіть категорію товару');
+            return;
+        }
+        if (!cost) {
+            setError('Введіть суму');
+            return;
+        }
 
-    let type = 'expense';
-    let cleanCost = cost;
+        // 4. Логіка знаків спрощена: тип береться безпосередньо з пропса вкладки
+        const num = parseFloat(cost);
 
-    if (cost.startsWith('+')) {
-        type = 'income';
-        cleanCost = cost.slice(1);
-    } else if (cost.startsWith('-')) {
-        type = 'expense';
-        cleanCost = cost.slice(1);
-    }
+        if (isNaN(num) || num < 1) {
+            setError('Мінімальна сума: 1');
+            return;
+        }
 
-    const num = parseFloat(cleanCost);
+        let numericBalance = 0;
+        if (currentBalance && typeof currentBalance === 'string' && !currentBalance.startsWith('[')) {
+            numericBalance = parseFloat(currentBalance.replace(' UAH', '').trim()) || 0;
+        } else if (typeof currentBalance === 'number') {
+            numericBalance = currentBalance;
+        }
 
-    if (isNaN(num) || num < 1) {
-        setError('Мінімальна сума: 1');
-        return;
-    }
+        // Перевірка ліміту балансу працює тільки для витрат
+        if (type === 'expense' && num > numericBalance) {
+            setError('Звідки гроші');
+            return;
+        }
 
-    let numericBalance = 0;
-    if (currentBalance && typeof currentBalance === 'string' && !currentBalance.startsWith('[')) {
-        numericBalance = parseFloat(currentBalance.replace(' UAH', '').trim()) || 0;
-    } else if (typeof currentBalance === 'number') {
-        numericBalance = currentBalance;
-    }
+        let newBalanceValue = numericBalance;
+        if (type === 'income') {
+            newBalanceValue += num;
+        } else {
+            newBalanceValue -= num;
+        }
 
-    if (type === 'expense' && num > numericBalance) {
-        setError('Звідки гроші');
-        return;
-    }
+        const finalBalanceNumber = Math.round(newBalanceValue * 100) / 100;
+        dispatch(setBalance(finalBalanceNumber));
 
-    let newBalanceValue = numericBalance;
-    if (type === 'income') {
-        newBalanceValue += num;
-    } else {
-        newBalanceValue -= num;
-    }
+        const finalDate = selectedDate
+            ? selectedDate.toLocaleDateString('uk-UA')
+            : today.toLocaleDateString('uk-UA');
 
-    const finalBalanceNumber = Math.round(newBalanceValue * 100) / 100;
+        const transactionData = {
+            id: Date.now(),
+            date: finalDate,
+            description: description,
+            category: category,
+            amount: num,
+            type: type // Записуємо тип активної вкладки ('expense' або 'income')
+        };
 
-    dispatch(setBalance(finalBalanceNumber));
+        dispatch(addTransaction(transactionData));
 
-    const finalDate = selectedDate
-        ? selectedDate.toLocaleDateString('uk-UA')
-        : today.toLocaleDateString('uk-UA');
-
-    const transactionData = {
-        id: Date.now(),
-        date: finalDate,
-        description: description,
-        category: category,
-        amount: num,
-        type: type
+        setError('');
+        setCost('');
+        setDescription('');
+        setCategory('');
+        setSelectedDate(null);
     };
-
-    dispatch(addTransaction(transactionData));
-
-    setError('');
-    setCost('');
-    setDescription('');
-    setCategory('');
-    setSelectedDate(null);
-};
 
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
@@ -132,7 +123,6 @@ const TransactionForm = () => {
                 </div>
 
                <form className="form-core flex" onSubmit={handleSubmit}>
-
                     <div className="inputs-combobox flex">
                         <input
                             type="text"
@@ -147,9 +137,13 @@ const TransactionForm = () => {
                             }}
                         />
 
-                        <CategoryDropdown category={category} setCategory={(val) => {
-                            setCategory(val);
-                            setError('');
+                        {/* 5. Передаємо поточний тип у випадаючий список категорій */}
+                        <CategoryDropdown 
+                            type={type} 
+                            category={category} 
+                            setCategory={(val) => {
+                                setCategory(val);
+                                setError('');
                         }} />
 
                         <div className="cost-wrapper flex">
@@ -159,27 +153,19 @@ const TransactionForm = () => {
                                 placeholder="0.00"
                                 value={cost}
                                 onChange={(e) => {
-                                    let val = e.target.value;
+                                    let val = e.target.value.replace(',', '.');
 
-                                    val = val.replace(',', '.');
-
-                                    if (val !== '' && !/^[+-]?\d*\.?\d*$/.test(val)) {
+                                    // Забороняємо введення будь-яких символів окрім цифр та крапки
+                                    if (val !== '' && !/^\d*\.?\d*$/.test(val)) {
                                         return;
                                     }
 
                                     setCost(val);
 
-                                    let checkVal = val;
-                                    if (val.startsWith('+') || val.startsWith('-')) {
-                                        checkVal = val.slice(1);
-                                    }
-
-                                    const num = parseFloat(checkVal);
+                                    const num = parseFloat(val);
 
                                     if (val === '') {
                                         setError('Поле не може бути порожнім');
-                                    } else if (val === '+' || val === '-') {
-                                        setError('Введіть число після знаку');
                                     } else if (isNaN(num)) {
                                         setError('Введіть коректне число');
                                     } else if (num < 1) {
@@ -209,10 +195,7 @@ const TransactionForm = () => {
             </div>
 
             <div className="info-error-container" style={{ paddingLeft: '160px', marginTop: '8px' }}>
-                <span className="info-text" style={{ color: '#A6ABB9', fontSize: '12px', display: 'block', marginBottom: '4px', fontWeight: '400' }}>
-                    Напишіть +, якщо це дохід, або -, якщо витрата
-                </span>
-
+     
                 {error && (
                     <span className="error-text" style={{ color: 'red', fontSize: '12px', display: 'block', fontWeight: '400' }}>
                         {error}
