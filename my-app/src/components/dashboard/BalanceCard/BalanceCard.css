@@ -5,13 +5,18 @@
   padding-top: 40px;
 
 }
-
 .balance-label {
   color: var(--color-text);
   font-size: 12px;
   font-weight: 500;
   opacity: 0.7;
-   margin-left: 35%;
+  margin-left: 35%; 
+  transition: margin-left 0.3s ease; 
+}
+
+
+.balance-label.on-report {
+  margin-left: 3%;
 }
 
 .input-wrapper {

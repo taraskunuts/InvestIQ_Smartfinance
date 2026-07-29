@@ -69,4 +69,5 @@ textarea::placeholder {
   align-items: center;
   cursor: pointer;
   transition: background .25s;
+  padding: 6px 12px;
 }

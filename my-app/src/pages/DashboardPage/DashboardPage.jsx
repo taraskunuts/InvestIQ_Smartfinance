@@ -25,7 +25,7 @@ function DashboardPage() {
             <BalanceCard />
 
             <div className="dashboard-content-container">
-                {/* 1. Вкладки винесені НАД білим контейнером */}
+         
                 <div className="type-toggle-container">
                     <button 
                         type="button"

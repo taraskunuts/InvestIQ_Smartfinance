@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import barIcon from '../../../assets/icons/bar.svg'; 
+import { Link, useLocation } from 'react-router-dom';
+import barIcon from '../../../assets/icons/bar.svg';
 import '../../../index.css';
 import "./BalanceCard.css";
 import { setBalance, selectBalance } from '../../../redux/balance/balanceSlice.js';
@@ -12,6 +12,7 @@ const BalanceCard = () => {
     const [showTooltip, setShowTooltip] = useState(true);
     const [inputValue, setInputValue] = useState('');
     const [isFocused, setIsFocused] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         if (currentBalance !== undefined && currentBalance !== null && currentBalance !== 0) {
@@ -54,9 +55,14 @@ const BalanceCard = () => {
         ? inputValue
         : (currentBalance ? `${Number(currentBalance).toFixed(2)} UAH` : '');
 
+    const showReportLink = location.pathname !== '/report';
+
     return (
         <div className='balance_rap-component flex'>
-            <p className="balance-label">Баланс:</p>
+            <p className={`balance-label ${location.pathname === '/report' ? 'on-report' : ''}`}>
+                Баланс:
+            </p>
+
             <div className="input-wrapper">
                 <input
                     type="text"
@@ -80,10 +86,12 @@ const BalanceCard = () => {
             <button type="button" className="confirm-btn btn" onClick={handleConfirm}>
                 ПІДВЕРДИТИ
             </button>
-            <Link to="/report" className="report-link">
-                <span>Перейти до розрахунків</span>
-                <img className="report-link-icon" src={barIcon} alt="" />
-            </Link>
+            {showReportLink && (
+                <Link to="/report" className="report-link">
+                    <span>Перейти до розрахунків</span>
+                    <img className="report-link-icon" src={barIcon} alt="" />
+                </Link>
+            )}
         </div>
     );
 };
