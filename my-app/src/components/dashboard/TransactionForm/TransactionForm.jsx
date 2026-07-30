@@ -1,6 +1,6 @@
 import "./TransactionForm.css"
 import '../../../index.css';
-import { useState, useEffect } from 'react' // 1. Додали useEffect
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from '../../../redux/transactions/transactionsSlice.js';
 
@@ -10,8 +10,6 @@ import calendar from '../../../assets/icons/calendar.svg';
 import calculator from '../../../assets/icons/calculator.svg';
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
 import { setBalance } from '../../../redux/balance/balanceSlice.js';
-
-// 2. Приймаємо пропс 'type' (який дорівнює 'expense' або 'income')
 const TransactionForm = ({ type }) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [description, setDescription] = useState('');
@@ -20,9 +18,7 @@ const TransactionForm = ({ type }) => {
     const [error, setError] = useState('');
     const dispatch = useDispatch();
 
-    const currentBalance = useSelector(state => state.balance.value);
-
-    // 3. Автоматично очищаємо форму та помилки, коли користувач міняє вкладку
+    const currentBalance = useSelector(state => state.balance.value)
     useEffect(() => {
         setError('');
         setCost('');
@@ -48,8 +44,6 @@ const TransactionForm = ({ type }) => {
             setError('Введіть суму');
             return;
         }
-
-        // 4. Логіка знаків спрощена: тип береться безпосередньо з пропса вкладки
         const num = parseFloat(cost);
 
         if (isNaN(num) || num < 1) {
@@ -64,7 +58,6 @@ const TransactionForm = ({ type }) => {
             numericBalance = currentBalance;
         }
 
-        // Перевірка ліміту балансу працює тільки для витрат
         if (type === 'expense' && num > numericBalance) {
             setError('Звідки гроші');
             return;
@@ -90,7 +83,7 @@ const TransactionForm = ({ type }) => {
             description: description,
             category: category,
             amount: num,
-            type: type // Записуємо тип активної вкладки ('expense' або 'income')
+            type: type 
         };
 
         dispatch(addTransaction(transactionData));
@@ -137,7 +130,7 @@ const TransactionForm = ({ type }) => {
                             }}
                         />
 
-                        {/* 5. Передаємо поточний тип у випадаючий список категорій */}
+                        {}
                         <CategoryDropdown 
                             type={type} 
                             category={category} 
@@ -155,7 +148,6 @@ const TransactionForm = ({ type }) => {
                                 onChange={(e) => {
                                     let val = e.target.value.replace(',', '.');
 
-                                    // Забороняємо введення будь-яких символів окрім цифр та крапки
                                     if (val !== '' && !/^\d*\.?\d*$/.test(val)) {
                                         return;
                                     }
