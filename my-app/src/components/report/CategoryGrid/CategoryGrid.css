@@ -51,13 +51,18 @@
 }
 
 .category-grid{
+    display:flex;
+    flex-direction:column;
+    gap:35px;
+}
 
-    display:grid;
+.category-row{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:nowrap;
+}
 
-    grid-template-columns:repeat(6,1fr);
-
-    gap:35px 20px;
-
-    justify-items:center;
-
+.second-row{
+    justify-content:center;
 }

@@ -1,5 +1,5 @@
 import "./CategoryGrid.css";
-import '../../../index.css';
+import "../../../index.css";
 
 import { useSelector } from "react-redux";
 
@@ -16,21 +16,30 @@ function CategoryGrid({
     selectedCategory,
     setSelectedCategory,
     mode,
-    setMode
+    setMode,
+    month,
+    year
 }) {
 
     const transactions = useSelector(selectTransactions);
 
+    const filteredTransactions = transactions.filter(item => {
+
+        const [, itemMonth, itemYear] = item.date.split(".");
+
+        return (
+            Number(itemMonth) - 1 === month &&
+            Number(itemYear) === year
+        );
+
+    });
+
     const calculateAmount = (categoryId) => {
 
-        return transactions
+        return filteredTransactions
             .filter(item =>
                 item.category === categoryId &&
-                (
-                    mode === "expense"
-                        ? item.type === "expense"
-                        : item.type === "income"
-                )
+                item.type === mode
             )
             .reduce((sum, item) => sum + item.amount, 0);
 
@@ -53,7 +62,10 @@ function CategoryGrid({
 
                 <button
                     className="arrow-btn"
-                    onClick={() => setMode("expense")}
+                    onClick={() => {
+                        setMode("expense");
+                        setSelectedCategory(expenseCategories[0].id);
+                    }}
                 >
                     &#8249;
                 </button>
@@ -66,16 +78,19 @@ function CategoryGrid({
 
                 <button
                     className="arrow-btn"
-                    onClick={() => setMode("income")}
+                    onClick={() => {
+                        setMode("income");
+                        setSelectedCategory(incomeCategories[0].id);
+                    }}
                 >
                     &#8250;
                 </button>
 
             </div>
 
-            <div className="category-grid">
+            <div className="category-row">
 
-                {categories.map(category => (
+                {categories.slice(0, 6).map(category => (
 
                     <CategoryCard
                         key={category.id}
@@ -87,6 +102,25 @@ function CategoryGrid({
                 ))}
 
             </div>
+
+            {categories.length > 6 && (
+
+                <div className="category-row second-row">
+
+                    {categories.slice(6).map(category => (
+
+                        <CategoryCard
+                            key={category.id}
+                            category={category}
+                            active={selectedCategory === category.id}
+                            onClick={() => setSelectedCategory(category.id)}
+                        />
+
+                    ))}
+
+                </div>
+
+            )}
 
         </section>
 

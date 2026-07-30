@@ -1,13 +1,12 @@
 import "./StatisticsChart.css";
-import '../../../index.css';
 
 import {
+    ResponsiveContainer,
     BarChart,
     Bar,
     XAxis,
     YAxis,
     Tooltip,
-    ResponsiveContainer,
     Cell
 } from "recharts";
 
@@ -15,32 +14,58 @@ import { useSelector } from "react-redux";
 
 import { selectTransactions } from "../../../redux/transactions/transactionsSlice";
 
-function StatisticsChart({ category, mode = "expense" }) {
+function StatisticsChart({
+
+    category,
+    mode,
+    month,
+    year
+
+}) {
 
     const transactions = useSelector(selectTransactions);
 
-    const chartData = transactions
+    const filteredTransactions = transactions.filter(item => {
+
+        const [, itemMonth, itemYear] = item.date.split(".");
+
+        return (
+            Number(itemMonth) - 1 === month &&
+            Number(itemYear) === year
+        );
+
+    });
+
+    const chartData = filteredTransactions
+
         .filter(item =>
             item.type === mode &&
             item.category === category
         )
+
         .map(item => ({
             name: item.description,
             amount: item.amount
         }))
+
         .sort((a, b) => b.amount - a.amount);
 
     if (chartData.length === 0) {
+
         return (
+
             <div className="empty-chart">
-                {mode === "expense"
-                    ? "Немає витрат для відображення"
-                    : "Немає доходів для відображення"}
+
+                Немає {mode === "expense" ? "витрат" : "доходів"} для відображення
+
             </div>
+
         );
+
     }
 
     return (
+
         <div className="statistics-chart">
 
             <ResponsiveContainer
@@ -75,6 +100,7 @@ function StatisticsChart({ category, mode = "expense" }) {
                     >
 
                         {chartData.map((entry, index) => (
+
                             <Cell
                                 key={index}
                                 fill={
@@ -83,6 +109,7 @@ function StatisticsChart({ category, mode = "expense" }) {
                                         : "#FFDAC0"
                                 }
                             />
+
                         ))}
 
                     </Bar>
@@ -92,7 +119,9 @@ function StatisticsChart({ category, mode = "expense" }) {
             </ResponsiveContainer>
 
         </div>
+
     );
+
 }
 
 export default StatisticsChart;

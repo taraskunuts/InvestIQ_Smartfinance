@@ -5,11 +5,9 @@
 
 .login-title {
 
-    text-align: center;
+    text-align: start;
 
     font-size: 14px;
-
-    margin-bottom: 20px;
 
     line-height: 1.6;
 }
@@ -29,9 +27,9 @@
 
 .login-divider {
 
-    text-align: center;
+    text-align: start;
 
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 
     font-size: 13px;
 }
@@ -110,4 +108,16 @@
 
 .register-btn {
     background: #f1f1f1;
+}
+.google-login-wrapper {
+    width: 122px;
+    height: 40px;
+
+    margin: 20px auto 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 26px;
+    border: 1px solid #AAB2C533;
 }

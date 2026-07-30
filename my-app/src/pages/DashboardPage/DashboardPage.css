@@ -1,45 +1,50 @@
 .dashboard-page {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #F5F6FB;
+    width: 100%;
+    min-height: 100vh;
 
-  box-sizing: border-box;
-  padding-top: 20px;
+    background-color: #F5F6FB;
+
+    background-image: url("../../assets/icons/Big_login_background.svg");
+    background-repeat: no-repeat;
+    background-position: left 10px bottom 0;
+
+    box-sizing: border-box;
 }
 
 .white-board-container {
-  width: 1234px;
-  background: #FFFFFF;
-  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
-  border-radius: 0px 30px 30px 30px;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin: 30px auto 0 auto;
-  box-sizing: border-box;
+    width: 1234px;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    border-radius: 0px 30px 30px 30px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 30px auto 0 auto;
+    box-sizing: border-box;
 }
 
 .form-row-section {
-  width: 100%;
+    width: 100%;
 }
 
 .data-row-section {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-  width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .table-zone {
-  flex: 1;
+    flex: 1;
 }
 
 .summary-zone {
-  width: 330px;
-  margin-right: 45px;
+    width: 330px;
+    margin-right: 45px;
 }
- /* Обгортка для центрування контенту під балансом */
+
+/* Обгортка для центрування контенту під балансом */
 .dashboard-content-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -49,61 +54,58 @@
 /* Контейнер для вкладок */
 .type-toggle-container {
     display: flex;
-    margin-bottom: 0; /* Важливо: прибираємо відступ знизу, щоб вкладки торкалися білої плашки */
+    margin-bottom: 0;
 }
 
-/* Базовий стиль для обох вкладок */
+/* Базовий стиль вкладок */
 .toggle-btn {
     width: 138px;
     height: 40px;
+
     border: none;
     outline: none;
+
     font-family: inherit;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: .02em;
     text-transform: uppercase;
-    cursor: pointer;
-    text-align: center;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    
-    border-radius: 20px 20px 0px 0px; 
-    
-    
-    background-color: #FAFBFD;
-    color: #000000;
-    transition: all 0.2s ease;
-}
 
+    cursor: pointer;
+
+    border-radius: 20px 20px 0 0;
+
+    background: #FAFBFD;
+    color: #000;
+
+    transition: .2s;
+}
 
 .toggle-btn.active {
-    background-color: #FFFFFF;
+    background: #FFF;
     position: relative;
-    z-index: 3; 
+    z-index: 3;
 }
 
-.expense-tab.active {
-    color: #FF751D; 
-}
-
-
+.expense-tab.active,
 .income-tab.active {
-   color: #FF751D; 
+    color: #FF751D;
 }
-
 
 .white-board-container {
-    background: #FFFFFF;
-    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
-    
+    background: #FFF;
+    box-shadow: 0px 10px 60px rgba(170,178,197,.2);
 
-    border-radius: 0px 30px 30px 30px; 
-    
+    border-radius: 0 30px 30px 30px;
+
     padding: 30px;
+
     position: relative;
     z-index: 2;
-    margin-top: -1px; 
+
+    margin-top: -1px;
 }
